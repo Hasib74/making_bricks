@@ -1,0 +1,4 @@
+#Wed Jan 18 17:33:47 BDT 2023
+base.0=/Users/goldeninfotechapple-1/development/Flutter/testing_mason/gdn_health_app/build/app/intermediates/dex/productionDebug/mergeDexProductionDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
