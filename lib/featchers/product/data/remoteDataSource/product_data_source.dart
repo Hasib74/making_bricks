@@ -18,7 +18,8 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     print(
         "Is connectedwith internet : ${await sl<AppNetworkInfo>().isConnected}");
 
-    if (   await sl<AppNetworkInfo>().isConnected) {
+
+    if (await sl<AppNetworkInfo>().isConnected) {
       http.Response _res = await http.get(Uri.parse(AppUri.products));
 
       print("Current _response :: ${_res.body}");

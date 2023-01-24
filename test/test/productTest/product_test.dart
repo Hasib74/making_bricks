@@ -6,8 +6,10 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 import '../../data/product_data_source.dart';
-import '../../product/model.dart';
-import '../../product/product_model.dart';
+
+
+import '../../domain/model/product/model.dart';
+import '../../domain/model/product/product_model.dart';
 import '../../service/product_service.dart';
 import 'product_test.mocks.dart';
 

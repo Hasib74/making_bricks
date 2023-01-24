@@ -14,6 +14,7 @@ part 'product_state.dart';
 class ProductCubit extends Cubit<ProductState> {
   ProductUseCase? productUseCase;
 
+
   ProductCubit({this.productUseCase}) : super(ProductInitial());
 
   fetchProduct() async {

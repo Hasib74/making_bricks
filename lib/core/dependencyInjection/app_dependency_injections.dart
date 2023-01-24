@@ -15,7 +15,14 @@ GetIt sl = GetIt.instance;
 Future intiGetIt() async {
   sl.registerSingleton<FlavorConfig>(FlavorConfig());
   sl.registerSingleton(SplashScreenFunctions());
-  sl.registerSingleton<AppNetworkInfo>(NetworkInfoImpl(Connectivity()));
+
+  //network
+
+  if (sl<FlavorConfig>().flavor == null) {
+    sl.registerSingleton<AppNetworkInfo>(MockConnectivity());
+  } else {
+    sl.registerSingleton<AppNetworkInfo>(NetworkInfoImpl(Connectivity()));
+  }
 
   //functions
   sl.registerLazySingleton(() => ProductFunctions());

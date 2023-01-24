@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:mockito/mockito.dart';
 
 abstract class AppNetworkInfo {
   Future<bool> get isConnected;
@@ -19,4 +20,9 @@ class NetworkInfoImpl implements AppNetworkInfo {
             ? true
             : false;
       });
+}
+
+class MockConnectivity extends Mock implements AppNetworkInfo {
+  @override
+  Future<bool> get isConnected => Future.value(true);
 }
