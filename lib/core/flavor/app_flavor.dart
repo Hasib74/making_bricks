@@ -1,13 +1,13 @@
 class FlavorConfig {
   Flavor? flavor;
 
-  FlavorConfig({ this.flavor});
+  FlavorConfig({this.flavor});
 
-   FlavorConfig? _flavorConfig;
+  FlavorConfig? _flavorConfig;
 
-   FlavorConfig? get flavorConfig => _flavorConfig;
+  FlavorConfig? get flavorConfig => _flavorConfig;
 
-    configure(FlavorConfig flavorConfig) {
+  configure(FlavorConfig flavorConfig) {
     _flavorConfig = flavorConfig;
   }
 }

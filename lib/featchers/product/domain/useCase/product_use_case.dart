@@ -7,16 +7,15 @@ import 'package:gdn_health/core/useCase/useCase.dart';
 
 import '../repository/product_repository.dart';
 
-
 class ProductUseCase extends UseCase<AppApiResponse, ProductParams> {
   ProductRepository? producteRepository;
 
   ProductUseCase({required this.producteRepository});
 
   @override
-  Future<Either<Failure , AppApiResponse<Model>>> call(ProductParams params) async {
+  Future<Either<Failure, AppApiResponse<Model>>> call(
+      ProductParams params) async {
     if (params is GetProductParms) {
-
       print("GetProductParms");
       return producteRepository!.getProducts();
     } else {
@@ -32,10 +31,8 @@ class ProductParams extends Equatable {
 }
 
 class GetProductParms extends ProductParams {
-
-  GetProductParms(){
-
-   print("GetProductParms");
+  GetProductParms() {
+    print("GetProductParms");
   }
   @override
   // TODO: implement props

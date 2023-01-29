@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gdn_health/core/remoteHelper/app_urls.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 import '../../data/product_data_source.dart';
-
-
 import '../../domain/model/product/model.dart';
 import '../../domain/model/product/product_model.dart';
 import '../../service/product_service.dart';
@@ -15,7 +12,9 @@ import 'product_test.mocks.dart';
 
 class MockProduct extends Mock implements Product {}
 
-@GenerateMocks([http.Client] , )
+@GenerateMocks(
+  [http.Client],
+)
 main() async {
   MockProduct? mockProduct;
 
@@ -30,9 +29,10 @@ main() async {
 
       print("The product res : " + jsonDecode(_productRes!).toString());
 
-      when(client.get(Uri.parse(AppUri.products) , headers: anyNamed('headers'), // Add this line
-      ))
-          .thenAnswer((_) async => http.Response(_productRes, 200));
+      when(client.get(
+        Uri.parse(AppUri.products),
+        headers: anyNamed('headers'), // Add this line
+      )).thenAnswer((_) async => http.Response(_productRes, 200));
 
       //can null able or not
       ProductModel _product =

@@ -12,8 +12,8 @@ class ProductFunctions {
   ProductModel? productModel;
 
   Future<Either<Failure, ProductModel>> getProducts(
-      ProductUseCase? productUseCase, void Function(ProductState state) emit) async {
-
+      ProductUseCase? productUseCase,
+      void Function(ProductState state) emit) async {
     print("getProducts");
 
     emit(ProductLoading());

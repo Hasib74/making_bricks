@@ -24,8 +24,6 @@ class AppApiResponse<T extends Model> {
     /*print("Status code ::: ${statusCode}");
     print("Body ::: ${jsonDecode(body!)["code"]}");
     print("message ::: ${message}");*/
-
-
   }
 
   factory AppApiResponse.data({

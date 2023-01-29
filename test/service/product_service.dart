@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 
 import '../domain/model/product/product_model.dart';
 
-
-
 class ProductService {
   String? url;
 
@@ -21,7 +19,7 @@ class ProductService {
       // If the server did return a 200 OK response,
       // then parse the JSON.
 
-    //  throw Exception('Failed to load album');
+      //  throw Exception('Failed to load album');
       return ProductModel.fromJson(jsonDecode(response.body));
     } else {
       // If the server did not return a 200 OK response,

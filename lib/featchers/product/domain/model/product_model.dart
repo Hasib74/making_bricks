@@ -5,15 +5,16 @@
 
 class ProductModel {
   ProductModel({
-      List<Products>? products, 
-      num? total, 
-      num? skip, 
-      num? limit,}){
+    List<Products>? products,
+    num? total,
+    num? skip,
+    num? limit,
+  }) {
     _products = products;
     _total = total;
     _skip = skip;
     _limit = limit;
-}
+  }
 
   ProductModel.fromJson(dynamic json) {
     if (json['products'] != null) {
@@ -30,15 +31,18 @@ class ProductModel {
   num? _total;
   num? _skip;
   num? _limit;
-ProductModel copyWith({  List<Products>? products,
-  num? total,
-  num? skip,
-  num? limit,
-}) => ProductModel(  products: products ?? _products,
-  total: total ?? _total,
-  skip: skip ?? _skip,
-  limit: limit ?? _limit,
-);
+  ProductModel copyWith({
+    List<Products>? products,
+    num? total,
+    num? skip,
+    num? limit,
+  }) =>
+      ProductModel(
+        products: products ?? _products,
+        total: total ?? _total,
+        skip: skip ?? _skip,
+        limit: limit ?? _limit,
+      );
   List<Products>? get products => _products;
   num? get total => _total;
   num? get skip => _skip;
@@ -54,7 +58,6 @@ ProductModel copyWith({  List<Products>? products,
     map['limit'] = _limit;
     return map;
   }
-
 }
 
 /// id : 1
@@ -71,17 +74,18 @@ ProductModel copyWith({  List<Products>? products,
 
 class Products {
   Products({
-      num? id, 
-      String? title, 
-      String? description, 
-      num? price, 
-      num? discountPercentage, 
-      num? rating, 
-      num? stock, 
-      String? brand, 
-      String? category, 
-      String? thumbnail, 
-      List<String>? images,}){
+    num? id,
+    String? title,
+    String? description,
+    num? price,
+    num? discountPercentage,
+    num? rating,
+    num? stock,
+    String? brand,
+    String? category,
+    String? thumbnail,
+    List<String>? images,
+  }) {
     _id = id;
     _title = title;
     _description = description;
@@ -93,7 +97,7 @@ class Products {
     _category = category;
     _thumbnail = thumbnail;
     _images = images;
-}
+  }
 
   Products.fromJson(dynamic json) {
     _id = json['id'];
@@ -119,29 +123,32 @@ class Products {
   String? _category;
   String? _thumbnail;
   List<String>? _images;
-Products copyWith({  num? id,
-  String? title,
-  String? description,
-  num? price,
-  num? discountPercentage,
-  num? rating,
-  num? stock,
-  String? brand,
-  String? category,
-  String? thumbnail,
-  List<String>? images,
-}) => Products(  id: id ?? _id,
-  title: title ?? _title,
-  description: description ?? _description,
-  price: price ?? _price,
-  discountPercentage: discountPercentage ?? _discountPercentage,
-  rating: rating ?? _rating,
-  stock: stock ?? _stock,
-  brand: brand ?? _brand,
-  category: category ?? _category,
-  thumbnail: thumbnail ?? _thumbnail,
-  images: images ?? _images,
-);
+  Products copyWith({
+    num? id,
+    String? title,
+    String? description,
+    num? price,
+    num? discountPercentage,
+    num? rating,
+    num? stock,
+    String? brand,
+    String? category,
+    String? thumbnail,
+    List<String>? images,
+  }) =>
+      Products(
+        id: id ?? _id,
+        title: title ?? _title,
+        description: description ?? _description,
+        price: price ?? _price,
+        discountPercentage: discountPercentage ?? _discountPercentage,
+        rating: rating ?? _rating,
+        stock: stock ?? _stock,
+        brand: brand ?? _brand,
+        category: category ?? _category,
+        thumbnail: thumbnail ?? _thumbnail,
+        images: images ?? _images,
+      );
   num? get id => _id;
   String? get title => _title;
   String? get description => _description;
@@ -169,5 +176,4 @@ Products copyWith({  num? id,
     map['images'] = _images;
     return map;
   }
-
 }

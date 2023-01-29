@@ -25,6 +25,5 @@ void main() async {
     BlocProvider(
       create: (context) => SplashScreenCubit(),
     ),
-
   ], child: const MyApp()));
 }

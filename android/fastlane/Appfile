@@ -1,2 +1,2 @@
-json_key_file("") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+json_key_file("path/to/your/play-store-credentials.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
 package_name("com.gdn_health_app.com") # e.g. com.krausefx.app

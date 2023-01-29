@@ -4,8 +4,6 @@ enum AppStateEnum {
 }
 
 class AppState {
-
-
   AppStateEnum? appStateEnum;
 
   //set and get appStateEnum

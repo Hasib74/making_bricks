@@ -21,7 +21,24 @@ platform :android do
     gradle(task: "test")
   end
 
+  des "Deploy to firebase app testing"
+  lane :distribute do
+     begin
+      firebase_app_distribution(
+      groups: "testers",
+      release_notes: "Fixing bug in features",
+      apk_path: "../build/app/outputs/flutter-apk/app-release.apk",
+      firebase_cli_path: "/usr/local/bin/firebase",
+      firebase_cli_token: <FIREBASE_CLI_TOKEN>
+      app: <YOUR_APP_ID>
+     )
+    end
+  end
+
+ 
+
   desc "Submit a new Beta Build to Crashlytics Beta"
+  
   lane :beta do
     gradle(task: "clean assembleRelease")
     crashlytics
