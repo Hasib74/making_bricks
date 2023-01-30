@@ -5,7 +5,12 @@ main() async {
 }
 
 runMason() {
-  "mason make my_feature featchers -o ./lib/featchers".run;
-  "mason make add_dependancy core -o ./lib/core".run;
+  var name = ask('name:', required: true, validator: Ask.alpha);
 
+  "mason make my_feature featchers --name ${name} -o ./lib/featchers".run;
+
+  "cd core".run;
+  "cd dependencyInjection".run;
+  "nano app_dependency_injections.dart".run;
+  "love".run;
 }
