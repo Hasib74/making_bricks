@@ -1,3 +1,5 @@
+#!/bin/bash
+
 import 'package:dcli/dcli.dart' as dcli;
 import 'package:gdn_health/core/extension/string_extendion.dart';
 
@@ -20,19 +22,12 @@ _dependancyInjection(String name) {
 
   var _data = dcli.read(_file);
 
-  // _data.toParagraph().replaceAll("}}\$", "     Love this \n}");
-
   List<String> _splitedList = _data.toParagraph().split("}");
-
-  //_splitedList[_splitedList.length].append("FK");
 
   String _writeData = "";
 
   _splitedList.forEach((element) {
-    //  print("Index of ${_splitedList.indexOf(element)} $element  \n");
     if (_splitedList.indexOf(element) == _splitedList.length - 1) {
-      //print("element : ${element}");
-
       element.replaceAll("\n", "");
       element.replaceAll(" ", "");
 
