@@ -1,10 +1,30 @@
-#!/bin/bash
+import 'dart:io';
 
 import 'package:dcli/dcli.dart' as dcli;
-import 'package:gdn_health/core/extension/string_extendion.dart';
+import 'package:args/args.dart';
+import 'package:dcli/dcli.dart';
 
-main() async {
-  runMason();
+main(List<String> arguments) async {
+  exitCode = 0;
+  final parser = ArgParser();
+  var _createParser = parser.addCommand("create", ArgParser());
+  _createParser.addOption("name",
+      abbr: "n", help: "name of the project", allowed: ["gdn_health"]);
+
+  final results = parser.parse(arguments);
+  if (results.command == null) {
+    printerr(red("No command specified"));
+    printerr(parser.usage);
+    exit(1);
+  } else if (results.command!.name == "create") {
+    results.command!.options.toList().forEach((element) {
+      print("element: ${element}");
+    });
+    // final projectName = results.command!.arguments.last;
+    // print("Creating project $projectName");
+  }
+
+  // runMason();
 }
 
 runMason() async {
@@ -12,7 +32,7 @@ runMason() async {
   //
   print(dcli.green('Name of your features is: $name'));
 
-  "mason make my_feature featchers --name $name -o ./lib/featchers".run;
+//  "mason make my_feature featchers --name $name -o ./lib/featchers".run;
 
   _dependancyInjection(name);
 }
