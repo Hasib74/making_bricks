@@ -4,82 +4,73 @@ import 'package:dcli/dcli.dart' as dcli;
 import 'package:args/args.dart';
 import 'package:dcli/dcli.dart';
 
+import 'make_features.dart';
+
 main(List<String> arguments) async {
-  exitCode = 0;
-  final parser = ArgParser();
-  var _createParser = parser.addCommand("create", ArgParser());
-  _createParser.addOption("name",
-      abbr: "n", help: "name of the project", allowed: ["gdn_health"]);
-
-  final results = parser.parse(arguments);
-  if (results.command == null) {
-    printerr(red("No command specified"));
-    printerr(parser.usage);
-    exit(1);
-  } else if (results.command!.name == "create") {
-    results.command!.options.toList().forEach((element) {
-      print("element: ${element}");
-    });
-    // final projectName = results.command!.arguments.last;
-    // print("Creating project $projectName");
-  }
-
   // runMason();
+
+  var parser = ArgParser();
+
+  _feature(parser);
+
+  _help(parser);
+
+  _result(parser, arguments);
 }
 
-runMason() async {
-  var name = dcli.ask("name: ", required: true, validator: dcli.Ask.alpha);
-  //
-  print(dcli.green('Name of your features is: $name'));
-
-//  "mason make my_feature featchers --name $name -o ./lib/featchers".run;
-
-  _dependancyInjection(name);
+void _help(dcli.ArgParser parser) {
+  parser.addFlag("help",
+      abbr: 'h', negatable: false, help: 'Displays this help message.');
 }
 
-_dependancyInjection(String name) {
-  var _file = "./lib/core/dependencyInjection/app_dependency_injections.dart";
-
-  var _data = dcli.read(_file);
-
-  List<String> _splitedList = _data.toParagraph().split("}");
-
-  String _writeData = "";
-
-  _splitedList.forEach((element) {
-    if (_splitedList.indexOf(element) == _splitedList.length - 1) {
-      element.replaceAll("\n", "");
-      element.replaceAll(" ", "");
-
-      _writeData += element.replaceAll("}", "").replaceAll(" ", "") +
-          "//function \n sl.registerLazySingleton(() => ${capitalize(name)}Functions()); \n";
-
-      _writeData += element.replaceAll("}", "").replaceAll(" ", "") +
-          "//DataSource \n sl.registerLazySingleton<${capitalize(name)}RemoteDataSource>(() => ${capitalize(name)}RemoteDataSourceImpl()); \n";
-
-      _writeData += element.replaceAll("}", "").replaceAll(" ", "") +
-          "//repository \n   sl.registerLazySingleton<${capitalize(name)}Repository>(() => ${capitalize(name)}RepositoryImpl(${name.toLowerCase()}RemoteDataSource: sl()));\n";
-
-      _writeData += element.replaceAll("}", "").replaceAll(" ", "") +
-          "//usecase \n   sl.registerLazySingleton<${capitalize(name)}UseCase>(() => ${capitalize(name)}UseCase(eRepository: sl()));\n }";
-    } else {
-      if (_splitedList.indexOf(element) == _splitedList.length - 2) {
-        _writeData += element + " \n";
-      } else {
-        _writeData += element + " \n}";
-      }
-    }
+void _feature(dcli.ArgParser parser) {
+  parser
+      .addOption('feature', abbr: 'f', help: 'Create a new feature', allowed: [
+    'make',
+    'delete'
+  ], allowedHelp: {
+    'make': 'Create a new feature',
+    'delete': 'Delete a feature',
   });
 
-  String imports =
-      ''' import '../../featchers/${name.toLowerCase()}/data/remoteDataSource/${name.toLowerCase()}_data_source.dart'; 
-  import '../../featchers/${name.toLowerCase()}/data/respository/${name.toLowerCase()}_repository_impl.dart'; 
-  import '../../featchers/${name.toLowerCase()}/domain/repository/${name.toLowerCase()}_repository.dart'; \n
-  import '../../featchers/${name.toLowerCase()}/domain/useCase/${name.toLowerCase()}_use_case.dart'; \n
-  import '../../featchers/${name.toLowerCase()}/presentation/functions/${name.toLowerCase()}_functions.dart'; \n  
-  ''';
+  parser.addOption('name', abbr: 'n', help: 'Name of the feature');
 
-  _file.write(imports + _writeData);
+  parser.addOption('output', abbr: 'o', help: 'Path of the feature');
+
+  // parser.addFlag("feature",
+  //     abbr: 'f', negatable: false, help: 'Create a new feature');
 }
 
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+void _result(dcli.ArgParser parser, List<String> arguments) {
+  var results = parser.parse(arguments);
+
+  if (results["feature"] != null) {
+    var _name = results["name"];
+    var _output = results["output"];
+    bool isMake = results["feature"] == "make";
+    if (isMake) {
+      print(dcli.green('Are you sure you want to create this feature: $_name'));
+      var _answer = dcli.ask("y/n: ", required: true, validator: Ask.required);
+
+      if (_answer == "y") {
+        MakeFeature(projectName: _name, isCreate: true);
+      } else {
+        exit(0);
+      }
+    } else {
+      print(dcli.green('Are you sure you want to delete this feature: $_name'));
+      var _answer = dcli.ask("y/n: ", required: true, validator: Ask.required);
+
+      if (_answer == "y") {
+        MakeFeature(projectName: _name, isCreate: false);
+      } else {
+        exit(0);
+      }
+    }
+  }
+
+  if (results['help'] == true) {
+    print(parser.usage);
+    exit(0);
+  }
+}
